@@ -19,7 +19,7 @@ const Script = () => {
 
   return (
     <View style={styles.container}>
-        {/* Header */}
+      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerText}>Header</Text>
       </View>
@@ -28,10 +28,11 @@ const Script = () => {
         {locations.map((location, index) => (
           <View key={index} style={styles.locationCard}>
             <Text style={styles.locationName}>{location.name}</Text>
-            <Image 
-              source={location.photo ? { uri: `assets/${location.photo}` } : require('./assets/no-image.png')}
+            <Image
+              source={location.photo ? require(`assets/${location.photo}`) : require('./assets/no-image.png')}
               style={styles.locationPhoto} 
             />
+
             {location.description && <Text style={styles.locationDescription}>{location.description}</Text>}
             <Text style={styles.locationAddress}>{location.address}</Text>
             <TouchableOpacity onPress={() => openInGoogleMaps(location.name, location.address)} style={styles.routeButton}>
@@ -43,15 +44,15 @@ const Script = () => {
 
       {/* Tabbalk */}
       <View style={styles.tabbar}>
-        <TouchableOpacity style={styles.tabButton} onPress={() => {/* Handle tab press */}}>
+        <TouchableOpacity style={styles.tabButton} onPress={() => {/* Handle tab press */ }}>
           <HomeIcon fill="white" />
           <Text style={styles.tabButtonText}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tabButton} onPress={() => {/* Handle tab press */}}>
+        <TouchableOpacity style={styles.tabButton} onPress={() => {/* Handle tab press */ }}>
           <LocationsIcon fill="white" />
           <Text style={styles.tabButtonText}>Locaties</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tabButton} onPress={() => {/* Handle tab press */}}>
+        <TouchableOpacity style={styles.tabButton} onPress={() => {/* Handle tab press */ }}>
           <EventsIcon fill="white" />
           <Text style={styles.tabButtonText}>Events</Text>
         </TouchableOpacity>
