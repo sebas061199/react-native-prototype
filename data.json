@@ -3,9 +3,9 @@
         {
             "number": "1",
             "name": "Café De Prins",
+            "photo": "de-prins.png",
             "address": "Hof 31, 3811CK Amersfoort",
-            "photo": "assets/de-prins.png",
-            "description": "\"Gezellige kroeg met Nederlandse muziek\""
+                        "description": "\"Gezellige kroeg met Nederlandse muziek\""
             
         },
         {

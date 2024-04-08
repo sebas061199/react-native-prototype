@@ -26,33 +26,35 @@ const Script = () => {
 
       <ScrollView contentContainerStyle={styles.locationCardContainer}>
         {locations.map((location, index) => (
-          <View key={index} style={styles.locationCard}>
-            <Text style={styles.locationName}>{location.name}</Text>
-            <Image
-              source={location.photo ? require(`assets/${location.photo}`) : require('./assets/no-image.png')}
-              style={styles.locationPhoto} 
-            />
+          <TouchableOpacity key={index} onPress={() => openInGoogleMaps(location.name, location.address)}>
+            <View key={index} style={styles.locationCard}>
+              <Text style={styles.locationName}>{location.name}</Text>
+              <Image
+                style={styles.locationPhoto}
+                source={location.photo ? { uri: `./Assets/${location.photo}` } : require('./Assets/no-image.png')}
+              />
+              {location.description && <Text style={styles.locationDescription}>{location.description}</Text>}
+              <Text style={styles.locationAddress}>{location.address}</Text>
+              <TouchableOpacity onPress={() => openInGoogleMaps(location.name, location.address)} style={styles.routeButton}>
+                <Text style={styles.routeButtonText}>Route</Text>
+              </TouchableOpacity>
+            </View>
 
-            {location.description && <Text style={styles.locationDescription}>{location.description}</Text>}
-            <Text style={styles.locationAddress}>{location.address}</Text>
-            <TouchableOpacity onPress={() => openInGoogleMaps(location.name, location.address)} style={styles.routeButton}>
-              <Text style={styles.routeButtonText}>Route</Text>
-            </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
 
       {/* Tabbalk */}
       <View style={styles.tabbar}>
-        <TouchableOpacity style={styles.tabButton} onPress={() => {/* Handle tab press */ }}>
+        <TouchableOpacity style={styles.tabButton} onPress={() => { /* Handle tab press */ }}>
           <HomeIcon fill="white" />
           <Text style={styles.tabButtonText}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tabButton} onPress={() => {/* Handle tab press */ }}>
+        <TouchableOpacity style={styles.tabButton} onPress={() => { /* Handle tab press */ }}>
           <LocationsIcon fill="white" />
           <Text style={styles.tabButtonText}>Locaties</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tabButton} onPress={() => {/* Handle tab press */ }}>
+        <TouchableOpacity style={styles.tabButton} onPress={() => { /* Handle tab press */ }}>
           <EventsIcon fill="white" />
           <Text style={styles.tabButtonText}>Events</Text>
         </TouchableOpacity>
@@ -75,55 +77,58 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   locationCardContainer: {
+    justifyContent: 'center',
     paddingHorizontal: 20,
-    paddingTop: 40, // Verhoogd van 20 naar 40 voor meer ruimte aan de bovenkant
-    paddingBottom: 100, // Verhoogd van 70 naar 100 voor meer ruimte onderaan voor de tabbalk
+    paddingTop: 20,
+    paddingBottom: 140, // Extra padding om ruimte te maken voor de tabbalk
   },
   locationCard: {
+    width: '100%',
     marginBottom: 20,
-    backgroundColor: '#ffffff',
     padding: 20,
-    borderRadius: 10,
-    elevation: 2,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    backgroundColor: '#fff',
   },
   locationName: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 10,
   },
   locationPhoto: {
     width: '100%',
-    height: 200,
-    borderRadius: 10,
-    marginTop: 10,
+    height: 150,
+    borderRadius: 5,
+    marginBottom: 10,
   },
   locationDescription: {
-    marginTop: 10,
+    fontSize: 14,
+    marginBottom: 10,
   },
   locationAddress: {
-    marginTop: 10,
+    fontSize: 12,
     color: '#888',
   },
   routeButton: {
     backgroundColor: '#db0a13',
-    marginTop: 10,
     padding: 10,
     borderRadius: 5,
+    alignItems: 'center',
   },
   routeButtonText: {
     color: '#ffffff',
-    textAlign: 'center',
   },
+
+
   tabbar: {
-    flexDirection: 'row', // Horizontale weergave
-    justifyContent: 'space-between', // Verdelen van de ruimte tussen de items
-    alignItems: 'center', // Verticaal centreren van de items
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: '#db0a13',
-    paddingVertical: 20, // Verhoogd van 10 naar 20 voor een grotere tabbalk
+    paddingVertical: 20,
     paddingHorizontal: 40,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
+    position: 'relative', // Verander de positie naar relative
     zIndex: 1000,
   },
   tabButton: {
