@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Linking } from 'react-native';
-import data from './data.json';
 import HomeIcon from './HomeIcon';
 import LocationsIcon from './LocationsIcon';
 import EventsIcon from './EventsIcon';
@@ -9,7 +8,10 @@ const Script = () => {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    setLocations(data.locaties);
+    fetch('./data.json')
+      .then(response => response.json)
+      .then(data => setLocations(data))
+      .catch(error => console.error('Fetch failed', error));
   }, []);
 
   const openInGoogleMaps = (name, address) => {
@@ -31,7 +33,7 @@ const Script = () => {
               <Text style={styles.locationName}>{location.name}</Text>
               <Image
                 style={styles.locationPhoto}
-                source={location.photo ? { uri: `./Assets/${location.photo}` } : require('./Assets/no-image.png')}
+                source={location.photo ? { uri: location.photo } : require('./Assets/no-image.png')}
               />
               {location.description && <Text style={styles.locationDescription}>{location.description}</Text>}
               <Text style={styles.locationAddress}>{location.address}</Text>
@@ -39,7 +41,6 @@ const Script = () => {
                 <Text style={styles.routeButtonText}>Route</Text>
               </TouchableOpacity>
             </View>
-
           </TouchableOpacity>
         ))}
       </ScrollView>
