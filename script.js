@@ -33,7 +33,7 @@ const Script = () => {
               <Text style={styles.locationName}>{location.name}</Text>
               <Image
                 style={styles.locationPhoto}
-                source={location.photo ? { uri: location.photo } : require('./Assets/no-image.png')}
+                source={location.photo ? { uri: location.photo } : require('./Photos/no-image.png')}
               />
               {location.description && <Text style={styles.locationDescription}>{location.description}</Text>}
               <Text style={styles.locationAddress}>{location.address}</Text>
