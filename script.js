@@ -8,7 +8,7 @@ const Script = () => {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    fetch('./data.json')
+    fetch('C:/react-native-prototype/data.json')
       .then(response => response.json)
       .then(data => setLocations(data))
       .catch(error => console.error('Fetch failed', error));
